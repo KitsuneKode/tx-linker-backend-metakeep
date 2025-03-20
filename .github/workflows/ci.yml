@@ -26,5 +26,5 @@ jobs:
             pm2 stop all
             git pull origin main
             bun install
-            pm2 start src/index.ts
+            pm2 start bun --name 'backend-service' -- start
             

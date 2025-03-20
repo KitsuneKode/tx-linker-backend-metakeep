@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Configure middleware
-app.use(cors());
+app.use(cors(['http://localhost:3000', 'https://thttps://tx-linker.vercel.app/']));
 app.use(express.json());
 
 // Connect to MongoDB

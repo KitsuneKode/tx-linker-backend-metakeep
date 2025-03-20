@@ -1,0 +1,30 @@
+name: Push-to-EC2 instance
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Push to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.2.1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd tx-linker-backend-metakeep
+            pm2 stop all
+            git pull origin main
+            bun install
+            pm2 start src/index.ts
+            

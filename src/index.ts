@@ -44,6 +44,7 @@ app.post(
       `[${new Date().toISOString()}] POST /api/analytics/pageload - Request received`
     );
     console.log('Request Body:', req.body);
+    console.log('Analytics page load request received');
 
     try {
       const timestamp = new Date();
@@ -99,21 +100,22 @@ app.post(
 
 // Record general analytics event
 app.post(
-  '/api/analytics/event',
+  '/api/eventlog',
   async (req: Request, res: Response, next: NextFunction) => {
+
     console.log(
       `[${new Date().toISOString()}] POST /api/analytics/event - Request received`
     );
     console.log('Request Body:', req.body);
-
     try {
       const { event, data } = req.body;
       const timestamp = new Date();
-
+      
       console.log(
         `[${new Date().toISOString()}] Logging analytics event: ${event}`
       );
-
+      
+      console.log('Analytics event request received');
       await AnalyticsEventModel.create({
         eventType: `event_${event}`,
         timeKey: `${timestamp.toISOString()}#${uuidv4()}`,

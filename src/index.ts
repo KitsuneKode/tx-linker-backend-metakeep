@@ -104,7 +104,7 @@ app.post(
   async (req: Request, res: Response, next: NextFunction) => {
 
     console.log(
-      `[${new Date().toISOString()}] POST /api/analytics/event - Request received`
+      `[${new Date().toISOString()}] POST /api/eventlog - Request received`
     );
     console.log('Request Body:', req.body);
     try {
@@ -132,7 +132,7 @@ app.post(
       res.status(200).json({ success: true });
     } catch (error) {
       console.error(
-        `[${new Date().toISOString()}] Error in /api/analytics/event:`,
+        `[${new Date().toISOString()}] Error in /api/eventlog:`,
         error
       );
       next(error);
